@@ -5,7 +5,7 @@ Google의 Gemini 1.5 모델을 사용하여 추천 결과를 생성합니다.
 
 ---
 
-## 📁 프로젝트 구조
+## 프로젝트 구조
 
 ```
 /api
@@ -17,7 +17,7 @@ README.md
 
 ---
 
-## 🔧 설치 및 실행 방법
+## 설치 및 실행 방법
 
 ### 1. 패키지 설치
 
@@ -41,7 +41,7 @@ vercel dev
 
 ---
 
-## 📡 API 사용법
+## API 사용법
 
 ### ● 요청
 
@@ -67,7 +67,7 @@ vercel dev
 
 ---
 
-## 🌐 배포 (Vercel)
+## 배포 (Vercel)
 
 `vercel.json` 설정으로 `/` 요청 시 `/api/duksungAI`로 자동 라우팅됩니다:
 
@@ -82,7 +82,7 @@ vercel dev
 
 ---
 
-## 📦 사용 기술
+## 사용 기술
 
 - Node.js
 - Google Generative AI SDK (`@google/generative-ai`)
@@ -90,8 +90,3 @@ vercel dev
 - dotenv
 
 ---
-
-## 🧠 참고
-
-- [Google Gemini API 공식 문서](https://ai.google.dev/)
-- [Vercel Docs - Serverless Functions](https://vercel.com/docs/functions)
