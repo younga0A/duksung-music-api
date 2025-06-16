@@ -1,14 +1,5 @@
-<<<<<<< HEAD
 {
-  "version": 2,
   "rewrites": [
-    { "source": "/(.*)", "destination": "/api/duksungAI" }
+    { "source": "/(.*)", "destination": "/api/duksungAI.js" }
   ]
-=======
-{
-  "version": 2,
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/api/duksungAI" }
-  ]
->>>>>>> e704738 (CORS 설정 적용 및 초기 API 코드 추가)
 }
