@@ -5,8 +5,13 @@ dotenv.config();
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 export default async function handler(req, res) {
+<<<<<<< HEAD
   /* CORS: 프론트 도메인만 허용 */
   const allowedOrigin = "https://younga0a.github.io";   // ← 도메인만, 경로 X
+=======
+
+  const allowedOrigin = "https://younga0a.github.io";   
+>>>>>>> 105dd9c (WIP: CORS 수정 전 임시 커밋)
   res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -15,12 +20,34 @@ export default async function handler(req, res) {
   if (req.method !== "POST")
     return res.status(405).json({ error: "POST 요청만 허용됩니다." });
 
+<<<<<<< HEAD
   /* body 파싱 */
   const { weather, mood } = req.body || {};
   if (!weather || !mood)
     return res.status(400).json({ error: "날씨와 기분이 필요합니다." });
 
+=======
+>>>>>>> 105dd9c (WIP: CORS 수정 전 임시 커밋)
   try {
+    
+    const body = await new Promise((resolve, reject) => {
+      let data = "";
+      req.on("data", chunk => data += chunk);
+      req.on("end", () => resolve(data));
+      req.on("error", err => reject(err));
+    });
+
+    if (!body) {
+      return res.status(400).json({ error: "빈 요청입니다." });
+    }
+
+    const parsed = JSON.parse(body);
+    const { weather, mood } = parsed;
+
+    if (!weather || !mood) {
+      return res.status(400).json({ error: "날씨와 기분이 필요합니다." });
+    }
+
     const today = new Date().toISOString().slice(0, 10);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 

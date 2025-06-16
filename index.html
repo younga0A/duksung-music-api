@@ -10,7 +10,7 @@
     <h1>오늘의 노래추천</h1>
 
     <!-- 기분에 따라 바뀌는 이미지 -->
-    <img class="image-banner" id="moodImage" src="image/image2.jpg" alt="노래 분위기 이미지" />
+    <img class="image-banner" id="moodImage" src="image/image2.png" alt="노래 분위기 이미지" />
 
     <form id="recommendForm">
       <div class="form-row">
@@ -80,7 +80,7 @@
   if (moodMap.hasOwnProperty(cleanMood)) {
     moodImage.src = moodMap[cleanMood];
   } else {
-    moodImage.src = "image/image2.jpg"; 
+    moodImage.src = "image/image2.png"; 
   }
 }
 
