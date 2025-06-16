@@ -5,18 +5,20 @@ dotenv.config();
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 export default async function handler(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  /* CORS: 프론트 도메인만 허용 */
+  const allowedOrigin = "https://younga0a.github.io";   // ← 도메인만, 경로 X
+  res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   if (req.method === "OPTIONS") return res.status(200).end();
-  if (req.method !== "POST") return res.status(405).json({ error: "POST 요청만 허용됩니다." });
+  if (req.method !== "POST")
+    return res.status(405).json({ error: "POST 요청만 허용됩니다." });
 
-  const { weather, mood } = req.body;
-
-  if (!weather || !mood) {
+  /* body 파싱 */
+  const { weather, mood } = req.body || {};
+  if (!weather || !mood)
     return res.status(400).json({ error: "날씨와 기분이 필요합니다." });
-  }
 
   try {
     const today = new Date().toISOString().slice(0, 10);
@@ -28,9 +30,9 @@ export default async function handler(req, res) {
 노래는 짧은 추천 이유를 포함해주세요. 보이넥스트도어라는 남자 아이돌 그룹으로 범위를 제한하겠습니다.
 `;
 
-    const result = await model.generateContent(prompt);
+    const result   = await model.generateContent(prompt);
     const response = await result.response;
-    const text = await response.text();
+    const text     = await response.text();
 
     res.status(200).json({ answer: text });
   } catch (error) {
