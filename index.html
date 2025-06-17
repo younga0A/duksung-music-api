@@ -43,6 +43,8 @@
   </div>
 
   <script>
+    const ENDPOINT = "https://assign2-fccem5ud8-youngahkims-projects.vercel.app/api/duksungAI";
+    
     function setupEmojiInput(inputId, dropdownId, callback) {
       const input = document.getElementById(inputId);
       const dropdown = document.getElementById(dropdownId);
@@ -69,11 +71,11 @@
     function updateMoodImage(mood) {
   const moodImage = document.getElementById("moodImage");
   const moodMap = {
-    "행복": "image/image3.jpg",
-    "우울": "image/image4.jpg",
-    "짜증": "image/image5.jpg",
-    "피곤": "image/image6.jpg"
-  };
+  "행복": "image/image3.png",
+  "우울": "image/image4.png",
+  "짜증": "image/image5.png",
+  "피곤": "image/image6.png"
+};
 
   const cleanMood = mood.trim();
 
@@ -96,24 +98,25 @@
     const resultDiv = document.getElementById("result");
 
     form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const weather = document.getElementById("weather").value;
-      const mood = document.getElementById("mood").value;
+    e.preventDefault();
+    const weather = document.getElementById("weather").value;
+    const mood    = document.getElementById("mood").value;
 
-      try {
-        const response = await fetch("/api/duksungAI", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ weather, mood })
-        });
+          try {
+      /* 여기 fetch 경로를 ENDPOINT 로 교체 */
+      const response = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ weather, mood })
+      });
 
-        const data = await response.json();
-        resultDiv.textContent = data.answer || "⚠️ " + data.error;
-      } catch (err) {
-        resultDiv.textContent = "⚠️ 서버 응답 실패";
-        console.error(err);
-      }
-    });
-  </script>
+      const data = await response.json();
+      resultDiv.textContent = data.answer || "⚠️ " + data.error;
+    } catch (err) {
+      resultDiv.textContent = "⚠️ 서버 응답 실패";
+      console.error(err);
+    }
+  });
+</script>
 </body>
 </html>
