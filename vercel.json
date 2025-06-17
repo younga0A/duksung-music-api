@@ -1,5 +1,8 @@
 {
   "rewrites": [
-    { "source": "/(.*)", "destination": "/api/duksungAI.js" }
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/duksungAI.js"
+    }
   ]
 }
